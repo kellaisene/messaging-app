@@ -1,26 +1,61 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+	state = {
+		text: {
+			message: '',
+			contactNumber: ''
+		}
+	};
+
+	handleContactNumberInput = (e) => {
+		const { text } = this.state;
+		this.setState({ text: { ...text, contactNumber: e.target.value } });
+	};
+
+	handleChangesMessageArea = (e) => {
+		const { text } = this.state;
+		this.setState({ text: { ...text, message: e.target.value } });
+	};
+
+	sendMessage = () => {
+		// Here I want to hit the send text endpoint
+		const { text } = this.state;
+		alert(`Text has been sent!`);
+		this.setState({
+			text: {
+				message: '',
+				contactNumber: ''
+			}
+		});
+	};
+
+	render() {
+		return (
+			<div className="App">
+				<header className="App-header">
+					<label>Phone Number:</label>
+					<input
+						className="input-contact-number"
+						type="text"
+						value={this.state.text.contactNumber}
+						onChange={this.handleContactNumberInput}
+					/>
+					<label>Message:</label>
+					<textarea
+						className="text-area-message"
+						type="text"
+						value={this.state.text.message}
+						onChange={this.handleChangesMessageArea}
+					/>
+					<button className="send-text-button" onClick={this.sendMessage}>
+						Send Text
+					</button>
+				</header>
+			</div>
+		);
+	}
 }
 
 export default App;
