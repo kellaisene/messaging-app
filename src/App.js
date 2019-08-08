@@ -32,7 +32,9 @@ class App extends Component {
 	};
 
 	render() {
+		// I'll want to add something to view the messages. Maybe make a thread like texting?
 		return (
+			// Just want to send the message to an actual phone and then move on from there
 			<div className="App">
 				<header className="App-header">
 					<label>Phone Number:</label>
